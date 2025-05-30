@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RestaurantFinal</string>
+    <string name="profile_icon">Profile Icon</string>
 </resources>

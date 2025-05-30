@@ -7,7 +7,7 @@
     <color name="secondary_color">#004E89</color>
     <color name="secondary_color_dark">#003D6B</color>
     <color name="secondary_color_light">#1A6BA8</color>
-
+    <color name="background_color">#FFFFFF</color>
     <color name="background_light">#FAFAFA</color>
     <color name="background_white">#FFFFFF</color>
     <color name="background_dark">#121212</color>

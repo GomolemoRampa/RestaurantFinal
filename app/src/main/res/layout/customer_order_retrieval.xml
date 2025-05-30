@@ -25,9 +25,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Order #12345"
-                android:textColor="@color/material_dynamic_neutral20"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
 
             <TextView
                 android:id="@+id/tvOrderStatus"
@@ -46,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pizza Palace"
-            android:textColor="@color/material_dynamic_neutral20"
             android:textSize="16sp"
+            android:textColor="@color/text_primary"
             android:layout_marginBottom="4dp" />
 
         <TextView
@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ordered at 10:30 AM"
-            android:textColor="@color/material_dynamic_neutral20"
             android:textSize="14sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginBottom="12dp" />
 
         <LinearLayout
@@ -70,8 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Rate this order:"
-                android:textColor="@color/material_dynamic_neutral20"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="@color/text_primary" />
 
             <Button
                 android:id="@+id/btnThumbsUp"
@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:text="You rated this order"
             android:textSize="12sp"
+            android:textColor="@color/text_secondary"
             android:layout_marginTop="8dp"
             android:visibility="gone" />
 
