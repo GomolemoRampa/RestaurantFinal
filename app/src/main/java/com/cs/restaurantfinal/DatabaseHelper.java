@@ -41,42 +41,49 @@ public class DatabaseHelper {
 
             OutputStream os = conn.getOutputStream();
             os.write(postData.getBytes("UTF-8"));
-
             os.flush();
             os.close();
 
             int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream())
-                );
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
-                while ((line = in.readLine()) != null)
+                while ((line = in.readLine()) != null) {
                     response.append(line);
+                }
                 in.close();
+
+                Log.d("AUTH_RESPONSE", response.toString()); // Log full response for debugging
 
                 JSONObject obj = new JSONObject(response.toString());
                 if (obj.getBoolean("success")) {
-                    JSONObject data = obj.getJSONObject("user");
+                    JSONObject data = obj.getJSONObject("data");
 
                     return new User(
                             0,
                             data.getString("full_name"),
                             data.getString("username"),
-                            data.getString("email"),
-                            data.getString("phone"),
-                            data.getString("password"),
-                            User.UserType.valueOf(data.getString("user_type"))
+                            "", // email not returned in login response
+                            "", // phone not returned in login response
+                            "", // password not returned in login response
+                            User.UserType.valueOf(data.getString("user_type").toUpperCase())
                     );
+
+                } else {
+                    Log.e("AUTH_FAIL", "Login failed: " + obj.getString("message"));
                 }
+            } else {
+                Log.e("AUTH_FAIL", "HTTP error code: " + responseCode);
             }
 
         } catch (Exception e) {
             Log.e("AUTH_ERROR", "Error authenticating user", e);
         }
+
         return null;
     }
+
 
     public boolean isUsernameTaken(String username) {
         try {
@@ -109,7 +116,6 @@ public class DatabaseHelper {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            // Encode each field to ensure safe transmission
             String postData =
                     "username=" + URLEncoder.encode(user.getUsername(), "UTF-8") +
                             "&full_name=" + URLEncoder.encode(user.getFullName(), "UTF-8") +
